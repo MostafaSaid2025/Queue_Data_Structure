@@ -1,5 +1,23 @@
 #include <stdio.h>
 #include "Queue.h"
+/**
+ * @brief Creates a new queue with the specified maximum size.
+ * 
+ * This function dynamically allocates memory for a new queue structure 
+ * and initializes its attributes. The maximum size of the queue is 
+ * specified by the parameter max_size. The status of the operation 
+ * is returned through the parameter ret_status.
+ * 
+ * @param max_size The maximum size of the queue.
+ * @param ret_status Pointer to an unsigned integer where the status 
+ *                   of the operation will be stored.
+ *                   Possible values are:
+ *                   - Queue_OK: Operation succeeded.
+ *                   - Queue_NOK: Operation failed.
+ * 
+ * @return Pointer to the newly created queue structure if successful, 
+ *         otherwise NULL.
+ */
 
 void *Queue_Create(unsigned int max_size , unsigned int *ret_status)
 {
@@ -38,6 +56,21 @@ void *Queue_Create(unsigned int max_size , unsigned int *ret_status)
     return My_Queue;
 
 }
+/**
+ * @brief Destroys the queue and releases allocated memory.
+ * 
+ * This function deallocates memory associated with the specified queue 
+ * and sets the queue pointer to NULL. The status of the operation 
+ * is returned through the parameter ret_status.
+ * 
+ * @param My_Queue Pointer to the queue structure.
+ * @param ret_status Pointer to an unsigned integer where the status 
+ *                   of the operation will be stored.
+ *                   Possible values are:
+ *                   - Queue_OK: Operation succeeded.
+ *                   - Queue_NULL_POINTER: Invalid queue pointer.
+ */
+
 void *Queue_Destroy(Queue_t *My_Queue , unsigned int *ret_status)
 {
     *ret_status = Queue_NOK;
@@ -54,6 +87,19 @@ void *Queue_Destroy(Queue_t *My_Queue , unsigned int *ret_status)
     }
     return NULL;
 }
+/**
+ * @brief Inserts an element at the rear of the queue.
+ * 
+ * This function inserts the specified element at the rear of the queue.
+ * If the queue is full, the operation fails, and the appropriate status 
+ * code is returned.
+ * 
+ * @param My_Queue Pointer to the queue structure.
+ * @param Element Pointer to the element to be inserted.
+ * 
+ * @return Queue_status indicating the status of the operation.
+ */
+
 Queue_status Enqueue(Queue_t *My_Queue , void *Element)
 {
     Queue_status ret = Queue_NOK;
@@ -87,6 +133,20 @@ Queue_status Enqueue(Queue_t *My_Queue , void *Element)
     return ret;
     }
 }
+
+/**
+ * @brief Removes and returns the element at the front of the queue.
+ * 
+ * This function removes and returns the element at the front of the queue.
+ * If the queue is empty, the operation fails, and the appropriate status 
+ * code is returned.
+ * 
+ * @param My_Queue Pointer to the queue structure.
+ * @param Element Pointer to an unsigned integer where the removed element 
+ *                will be stored.
+ * 
+ * @return Queue_status indicating the status of the operation.
+ */
 
 Queue_status Dequeue(Queue_t *My_Queue , unsigned int *Element)
 {
@@ -125,6 +185,21 @@ Queue_status Dequeue(Queue_t *My_Queue , unsigned int *Element)
     }
     return ret;
 }
+
+/**
+ * @brief Retrieves the element at the front of the queue.
+ * 
+ * This function retrieves the element at the front of the queue without 
+ * removing it. If the queue is empty, the operation fails, and the 
+ * appropriate status code is returned.
+ * 
+ * @param My_Queue Pointer to the queue structure.
+ * @param Element Pointer to an unsigned integer where the front element 
+ *                will be stored.
+ * 
+ * @return Queue_status indicating the status of the operation.
+ */
+
 Queue_status Queue_Front(Queue_t *My_Queue , unsigned int *Element)
 {
     Queue_status ret = 0;
@@ -147,6 +222,20 @@ Queue_status Queue_Front(Queue_t *My_Queue , unsigned int *Element)
     return ret;
 
 }
+/**
+ * @brief Retrieves the element at the rear of the queue.
+ * 
+ * This function retrieves the element at the rear of the queue without 
+ * removing it. If the queue is empty, the operation fails, and the 
+ * appropriate status code is returned.
+ * 
+ * @param My_Queue Pointer to the queue structure.
+ * @param Element Pointer to an unsigned integer where the rear element 
+ *                will be stored.
+ * 
+ * @return Queue_status indicating the status of the operation.
+ */
+
 Queue_status Queue_Rear(Queue_t *My_Queue , unsigned int *Element)
 {
      Queue_status ret = 0;
@@ -168,6 +257,18 @@ Queue_status Queue_Rear(Queue_t *My_Queue , unsigned int *Element)
     }
     return ret;
 }
+
+/**
+ * @brief Displays the elements of the queue.
+ * 
+ * This function displays the elements of the queue. If the queue is empty, 
+ * an appropriate message is printed.
+ * 
+ * @param My_Queue Pointer to the queue structure.
+ * 
+ * @return Queue_status indicating the status of the operation.
+ */
+
 Queue_status Queue_Display(Queue_t *My_Queue)
 {
     Queue_status ret = Queue_NOK;
